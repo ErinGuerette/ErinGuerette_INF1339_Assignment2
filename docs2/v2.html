@@ -1,0 +1,46 @@
+<html>
+<head>
+    <title>Erin INF1339 Project 2</title>
+    
+    <style>
+        .output {color: pink;}
+    </style>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    
+    <script>
+        function hello() {
+            document.getElementById("test_output").innerHTML = "hello"
+        }
+        
+        var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=5BBMRl5Lg4GxBMeNitGUUcxiiGi9qkwu"
+        var articlecount = 0
+        
+        function setup() {
+            //P5 usually used for drawing 
+        noCanvas();
+            //SEND the URL and when the data comes back, run the function "gotData" 
+        loadJSON(url, gotData);
+        }
+        
+        //gotDATA for now just announces itself 
+        function gotData(data) {
+        //alert("FUNCTION GOTDATA WAS ACTIVATED")
+        //document.getElementById("test_output").innerHTML = data.response.docs[0].headline.main
+              var text =''
+                for (i=0; i < data.response.docs.length; i++) {
+                    text = text + '<br />' + data.response.docs[i].headline.main
+                }
+                document.getElementById("test_output").innerHTML = text
+               }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>NYT API: An article</h1>
+    
+    <p id="test_output" class="output"></p>
+    
+</body>
+</html>
